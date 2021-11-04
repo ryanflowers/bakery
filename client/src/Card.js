@@ -116,6 +116,7 @@ const Card = ({ onPaymentSuccess }) => {
       let card;
       try {
         card = await initializeCard(payments);
+        card = await initializeCard(payments);
       } catch (e) {
         console.error("Initializing Card failed", e);
         return;
