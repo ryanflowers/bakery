@@ -1,4 +1,4 @@
-import { useEffect, createRef } from "react";
+import { useEffect, createRef, memo } from "react";
 
 const appId = "sandbox-sq0idb-qye2EIz2rpQMlGLZ4wQ6nQ";
 const locationId = "LCHG32HK18R8J";
@@ -85,7 +85,7 @@ function displayPaymentResults(statusContainer, status) {
   statusContainer.style.visibility = "visible";
 }
 
-const Card = ({ onPaymentSuccess }) => {
+const Card = memo(({ onPaymentSuccess }) => {
   // Use refs as dirty hack not gonna spend time migrating this example code to react states etc
   const cardButtonRef = createRef();
   const statusRef = createRef();
@@ -115,7 +115,6 @@ const Card = ({ onPaymentSuccess }) => {
       // Init Card
       let card;
       try {
-        card = await initializeCard(payments);
         card = await initializeCard(payments);
       } catch (e) {
         console.error("Initializing Card failed", e);
@@ -152,6 +151,6 @@ const Card = ({ onPaymentSuccess }) => {
       <div ref={statusRef} id="payment-status-container"></div>
     </>
   );
-};
+});
 
 export { Card };

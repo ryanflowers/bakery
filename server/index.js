@@ -43,6 +43,36 @@ app.get("/api/transactions", async (req, res) => {
   res.json({ message: list.body });
 });
 
+const toOrderItems = (items) =>
+  items.map((item) => ({
+    name: item.item_variation_data.name,
+    quantity: "1",
+    itemType: "ITEM",
+    basePriceMoney: {
+      amount: item.item_variation_data.price_money.amount,
+      currency: item.item_variation_data.price_money.currency,
+    },
+  }));
+
+app.post("/api/createOrder", async (req, res) => {
+  const { lineItems, state } = await json(req);
+
+  try {
+    const response = await client.ordersApi.createOrder({
+      order: {
+        locationId: LOCATION_ID,
+        lineItems: toOrderItems(lineItems),
+        state,
+      },
+      idempotencyKey: "c4c238ad-bd8c-4b72-8ffc-81e04a1234e6",
+    });
+
+    res.send(response.body);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 app.get("/api", (req, res) => {
   res.json({ message: "Sorry sub path required!" });
 });
@@ -94,8 +124,6 @@ app.post("/payment", async (req, res) => {
       );
 
       //   logger.info("Payment succeeded!", { result, statusCode });
-
-      // TODO: return payment ID here..
 
       send(res, statusCode, {
         success: true,
