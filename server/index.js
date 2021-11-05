@@ -64,7 +64,7 @@ app.post("/api/createOrder", async (req, res) => {
         lineItems: toOrderItems(lineItems),
         state,
       },
-      idempotencyKey: "c4c238ad-bd8c-4b72-8ffc-81e04a1234e6",
+      idempotencyKey: nanoid(),
     });
 
     res.send(response.body);
@@ -82,17 +82,9 @@ app.get("/api", (req, res) => {
  **/
 app.post("/payment", async (req, res) => {
   const payload = await json(req);
-  //   logger.debug(JSON.stringify(payload));
-  // We validate the payload for specific fields. You may disable this feature
-  // if you would prefer to handle payload validation on your own.
-  //   if (!validatePaymentPayload(payload)) {
-  //     throw createError(400, "Bad Request");
-  //   }
 
   await retry(async (bail) => {
     try {
-      //   logger.debug("Creating payment", { attempt });
-
       const idempotencyKey = payload.idempotencyKey || nanoid();
       const payment = {
         idempotencyKey,
@@ -123,8 +115,6 @@ app.post("/payment", async (req, res) => {
         payment
       );
 
-      //   logger.info("Payment succeeded!", { result, statusCode });
-
       send(res, statusCode, {
         success: true,
         payment: {
@@ -135,15 +125,7 @@ app.post("/payment", async (req, res) => {
         },
       });
     } catch (ex) {
-      //   if (ex instanceof ApiError) {
-      // likely an error in the request. don't retry
-      // logger.error(ex.errors);
       bail(ex);
-      //   } else {
-      //     // IDEA: send to error reporting service
-      //     // logger.error(`Error creating payment on attempt ${attempt}: ${ex}`);
-      //     throw ex; // to attempt retry
-      //   }
     }
   });
 });

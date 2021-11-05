@@ -19,7 +19,7 @@ const Cart = ({ selectedItem }) => {
 
   const onCheckout = useCallback(async () => {
     const result = await createOrder(data.items);
-    setData(() => ({ items: [], orderId: result.order.id }));
+    setData(() => ({ items: [], order: result.order }));
   }, [setData, data]);
 
   const onPaymentSuccess = useCallback(async () => {
@@ -27,15 +27,20 @@ const Cart = ({ selectedItem }) => {
   }, [setData]);
 
   return (
-    <div style={{ flexBasis: "15rem", padding: "1rem" }}>
+    <div
+      style={{
+        flexBasis: "15rem",
+        padding: "1rem",
+        paddingTop: "2rem",
+        backgroundColor: "white",
+      }}
+    >
       <div
         style={{
-          backgroundColor: "white",
-          borderRadius: "0.2em",
           height: "30rem",
           color: "black",
-          padding: "0.5rem",
           marginBottom: "1rem",
+          borderBottom: "0.1rem solid rgb(217, 217, 217)",
         }}
       >
         <label>Cart</label>
@@ -76,8 +81,18 @@ const Cart = ({ selectedItem }) => {
                 alignItems: "center",
               }}
             >
-              {data.orderId ? (
-                <span>Order ID {data.orderId}</span>
+              {data.order ? (
+                <div style={{ textAlign: "left", fontSize: "small" }}>
+                  <div style={{ fontSize: "large" }}>
+                    Total:{" "}
+                    <span style={{ fontWeight: "bold" }}>
+                      {formatIntToUSD(data.order.total_money.amount)}
+                    </span>
+                  </div>
+                  <div style={{ fontStyle: "italic" }}>
+                    OID: <span>{data.order.id}</span>
+                  </div>
+                </div>
               ) : (
                 <span>Cart is empty</span>
               )}
