@@ -116,7 +116,10 @@ const Cart = ({ selectedItem }) => {
       </button>
       {data.order ? (
         <div>
-          <Card onPaymentSuccess={onPaymentSuccess}></Card>
+          <Card
+            amount={data.order.total_money.amount}
+            onPaymentSuccess={onPaymentSuccess}
+          ></Card>
         </div>
       ) : null}
     </div>

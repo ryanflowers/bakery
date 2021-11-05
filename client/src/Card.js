@@ -1,5 +1,5 @@
 import { useEffect, createRef, memo } from "react";
-
+import { formatIntToUSD } from "./Utils";
 const appId = "sandbox-sq0idb-qye2EIz2rpQMlGLZ4wQ6nQ";
 const locationId = "LCHG32HK18R8J";
 
@@ -85,7 +85,7 @@ function displayPaymentResults(statusContainer, status) {
   statusContainer.style.visibility = "visible";
 }
 
-const Card = memo(({ onPaymentSuccess }) => {
+const Card = memo(({ onPaymentSuccess, amount }) => {
   // Use refs as dirty hack not gonna spend time migrating this example code to react states etc
   const cardButtonRef = createRef();
   const statusRef = createRef();
@@ -145,7 +145,7 @@ const Card = memo(({ onPaymentSuccess }) => {
       <form id="payment-form">
         <div id="card-container"></div>
         <button ref={cardButtonRef} id="card-button" type="button">
-          Pay $1.00
+          Pay {formatIntToUSD(amount)}
         </button>
       </form>
       <div ref={statusRef} id="payment-status-container"></div>
