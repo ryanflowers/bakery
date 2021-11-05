@@ -33,6 +33,7 @@ const Cart = ({ selectedItem }) => {
         padding: "1rem",
         paddingTop: "2rem",
         backgroundColor: "white",
+        minWidth: "20rem",
       }}
     >
       <div
@@ -113,9 +114,11 @@ const Cart = ({ selectedItem }) => {
       >
         Checkout
       </button>
-      <div>
-        <Card onPaymentSuccess={onPaymentSuccess}></Card>
-      </div>
+      {data.order ? (
+        <div>
+          <Card onPaymentSuccess={onPaymentSuccess}></Card>
+        </div>
+      ) : null}
     </div>
   );
 };

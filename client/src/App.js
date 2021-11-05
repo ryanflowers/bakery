@@ -85,7 +85,9 @@ const ItemVariationList = ({ variations, onItemClick }) => {
                 borderRadius: "0.2rem",
               }}
             />
-            <div style={{ fontSize: "1rem" }}>{item_variation_data.name}</div>
+            <div style={{ fontSize: "1rem", marginTop: "0.5rem" }}>
+              {item_variation_data.name}
+            </div>
             <div style={{ fontSize: "1rem", fontWeight: "bold" }}>
               {formatIntToUSD(item_variation_data.price_money.amount)}
             </div>
