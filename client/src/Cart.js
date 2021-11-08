@@ -27,45 +27,16 @@ const Cart = ({ selectedItem }) => {
   }, [setData]);
 
   return (
-    <div
-      style={{
-        flexBasis: "15rem",
-        padding: "1rem",
-        paddingTop: "2rem",
-        backgroundColor: "white",
-        minWidth: "20rem",
-      }}
-    >
-      <div
-        style={{
-          height: "30rem",
-          color: "black",
-          marginBottom: "1rem",
-          borderBottom: "0.1rem solid rgb(217, 217, 217)",
-        }}
-      >
+    <div className="cart">
+      <div className="cart-container">
         <label>Cart</label>
-        <div
-          style={{
-            fontSize: "medium",
-            height: "100%",
-          }}
-        >
+        <div className="cart-list">
           {data.items.length > 0 ? (
-            <div
-              style={{
-                paddingTop: "1rem",
-                flexDirection: "column",
-                height: "100%",
-                display: "flex",
-                gap: "0.5rem",
-                alignItems: "start",
-              }}
-            >
+            <div className="cart-item">
               {data.items.map((item) => (
                 <div>
                   <span>{item.item_variation_data.name}</span>
-                  <span style={{ fontWeight: "bold", paddingLeft: "0.5rem " }}>
+                  <span className="price">
                     {formatIntToUSD(
                       item.item_variation_data.price_money.amount
                     )}
@@ -74,23 +45,16 @@ const Cart = ({ selectedItem }) => {
               ))}
             </div>
           ) : (
-            <div
-              style={{
-                height: "100%",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
+            <div className="summary">
               {data.order ? (
-                <div style={{ textAlign: "left", fontSize: "small" }}>
-                  <div style={{ fontSize: "large" }}>
+                <div className="summary-cotainer">
+                  <div className="total">
                     Total:{" "}
-                    <span style={{ fontWeight: "bold" }}>
+                    <span className="price">
                       {formatIntToUSD(data.order.total_money.amount)}
                     </span>
                   </div>
-                  <div style={{ fontStyle: "italic" }}>
+                  <div className="order-info">
                     OID: <span>{data.order.id}</span>
                   </div>
                 </div>
@@ -101,19 +65,7 @@ const Cart = ({ selectedItem }) => {
           )}
         </div>
       </div>
-      <button
-        style={{
-          backgroundColor: "rgb(161, 0, 26)",
-          borderRadius: "0.5rem",
-          padding: "1.2rem",
-          width: "70%",
-          color: "#ffffff",
-          borderStyle: "none",
-        }}
-        onClick={onCheckout}
-      >
-        Checkout
-      </button>
+      <button onClick={onCheckout}>Checkout</button>
       {data.order ? (
         <div>
           <Card

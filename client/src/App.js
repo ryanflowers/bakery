@@ -47,17 +47,8 @@ const CatelogList = ({ objects, onItemClick }) => {
         const { item_data, id } = object;
 
         return (
-          <div
-            key={id}
-            style={{
-              border: "1px solid #282c34",
-              width: "20rem",
-              height: "35rem",
-              fontSize: "20px",
-            }}
-          >
-            {/* <div>{object.id}</div> */}
-            <div style={{ padding: "1rem" }}>{item_data.name}</div>
+          <div className="list-item" key={id}>
+            <div className="name">{item_data.name}</div>
             <div>{item_data.description}</div>
             <br />
             <ItemVariationList
@@ -75,33 +66,13 @@ const ItemVariationList = ({ variations, onItemClick }) => {
     ? variations.map((item) => {
         const { item_variation_data, id } = item;
         return (
-          <div key={id}>
-            {/* <div>{variation.id}</div> */}
-            <img
-              src={catelogItemImageMap.get(item_variation_data.item_id)}
-              style={{
-                width: "15rem",
-                height: "20rem",
-                borderRadius: "0.2rem",
-              }}
-            />
-            <div style={{ fontSize: "1rem", marginTop: "0.5rem" }}>
-              {item_variation_data.name}
-            </div>
-            <div style={{ fontSize: "1rem", fontWeight: "bold" }}>
+          <div className="item-variant" key={id}>
+            <img src={catelogItemImageMap.get(item_variation_data.item_id)} />
+            <div className="name">{item_variation_data.name}</div>
+            <div className="price">
               {formatIntToUSD(item_variation_data.price_money.amount)}
             </div>
-            <button
-              onClick={() => onItemClick(item)}
-              style={{
-                backgroundColor: "#a1001a",
-                width: "6rem",
-                borderRadius: "2.5rem",
-                border: "black solid 0.5px",
-                padding: "0.5rem",
-                margin: "0.5rem",
-              }}
-            >
+            <button onClick={() => onItemClick(item)} className="add">
               Add To Cart
             </button>
           </div>
@@ -137,28 +108,12 @@ const App = () => {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
       </header>
-      <div
-        style={{
-          width: "100%",
-          minHeight: "50rem",
-          backgroundColor: "black",
-          borderTop: "solid 0.1rem rgb(161, 0, 26)",
-        }}
-      >
+      <div className="main">
         {!data.catelog ? (
           "Loading..."
         ) : (
-          <div style={{ display: "flex" }}>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                flexGrow: "1",
-                flexWrap: "wrap",
-                padding: "2rem",
-                borderRight: "0.1rem solid rgb(161, 0, 26)",
-              }}
-            >
+          <div className="content">
+            <div className="list-container">
               <CatelogList
                 objects={data.catelog.objects}
                 onItemClick={onItemClick}

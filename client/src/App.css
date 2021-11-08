@@ -34,7 +34,140 @@
   }
 }
 
-/* Card CSS*/
+.App .main {
+  width: 100%;
+  min-height: 50rem;
+  background-color: black;
+  border-top: solid 0.1rem rgb(161, 0, 26);
+}
+
+.App .main .content {
+  display: flex;
+}
+
+/* List */
+
+.list-container {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  padding: 2rem;
+  border-right: 0.1rem solid rgb(161, 0, 26);
+}
+
+.list-item {
+  padding-top: 1rem;
+  border: 1px solid #282c34;
+  width: 20rem;
+  min-height: 31rem;
+  font-size: 20px;
+}
+
+.list-item .name {
+  padding: "1rem";
+}
+
+.item-variant img {
+  width: 15rem;
+  height: 20rem;
+  border-radius: 0.2rem;
+}
+
+.item-variant .name,
+.item-variant .price {
+  font-size: 1rem;
+}
+
+.item-variant .name {
+  margin-top: 0.5rem;
+}
+
+.item-variant .price {
+  font-weight: bold;
+}
+
+.item-variant .add {
+  background-color: #a1001a;
+  width: 6rem;
+  border-radius: 2.5rem;
+  border: black solid 0.5px;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  cursor: pointer;
+}
+
+/* Cart */
+
+.cart {
+  flex-basis: 15rem;
+  padding: 1rem;
+  padding-top: 2rem;
+  background-color: white;
+  min-width: 20rem;
+}
+
+.cart .cart-container {
+  height: 30rem;
+  color: black;
+  margin-bottom: 1rem;
+  border-bottom: 0.1rem solid rgb(217, 217, 217);
+}
+
+.cart .cart-list {
+  font-size: medium;
+  height: 100%;
+}
+
+.cart .cart-list .summary {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.summary .summary-cotainer {
+  text-align: left;
+  font-size: small;
+}
+
+.summary-cotainer .total {
+  font-size: large;
+}
+
+.total .price {
+  font-weight: bold;
+}
+
+.cart-container .order-info {
+  font-style: italic;
+}
+
+.cart .cart-list .cart-item {
+  padding-top: 1rem;
+  flex-direction: column;
+  height: 100%;
+  display: flex;
+  gap: 0.5rem;
+  align-items: start;
+}
+
+.cart-item .price {
+  font-weight: bold;
+  padding-left: 0.5rem;
+}
+
+.cart button {
+  background-color: rgb(161, 0, 26);
+  border-radius: 0.5rem;
+  padding: 1.2rem;
+  width: 70%;
+  color: #ffffff;
+  border-style: none;
+  cursor: pointer;
+}
+
+/* Card */
 
 #payment-form {
   max-width: 550px;
