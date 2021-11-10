@@ -1,0 +1,21 @@
+{{#if @variations.length}}
+
+  {{#each @variations as |variation|}}
+    <div class='item-variant'>
+      <img
+        alt='item'
+        src={{toImageSrc variation.item_variation_data.item_id}}
+      />
+      <div class='name'>{{variation.item_variation_data.name}}</div>
+      <div class='price'>
+        {{formatIntToUSD variation.item_variation_data.price_money.amount}}
+      </div>
+      <button type='button' onclick={{fn @onItemClick variation}} class='add'>
+        Add To Cart
+      </button>
+    </div>
+  {{/each}}
+
+{{else}}
+  No items found
+{{/if}}

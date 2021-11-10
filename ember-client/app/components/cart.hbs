@@ -1,0 +1,54 @@
+<div class='cart'>
+  <div class='cart-container'>
+    <label>Cart</label>
+    <div class='cart-list'>
+
+      {{#if @items.length}}
+        <div class='cart-item'>
+          {{#each @items as |item|}}
+            <div>
+              <span>{{item.item_variation_data.name}}</span>
+              <span class='price'>
+                {{formatIntToUSD item.item_variation_data.price_money.amount}}
+              </span>
+            </div>
+          {{/each}}
+        </div>
+
+      {{else}}
+        <div class='summary'>
+
+          {{#if this.order}}
+            <div class='summary-cotainer'>
+              <div class='total'>
+                Total:
+                <span class='price'>
+                  {{formatIntToUSD this.order.total_money.amount}}
+                </span>
+              </div>
+              <div class='order-info'>
+                OID:
+                <span>{{this.order.id}}</span>
+              </div>
+            </div>
+
+          {{else}}
+            <span>Cart is empty</span>
+          {{/if}}
+
+        </div>
+      {{/if}}
+
+    </div>
+  </div>
+
+  {{#if @items.length}}
+    <button type='button' onclick={{this.onCheckout}}>Checkout</button>
+  {{/if}}
+
+  {{#if this.order}}
+    <div>
+      <Card @amount={{this.order.total_money.amount}} />
+    </div>
+  {{/if}}
+</div>

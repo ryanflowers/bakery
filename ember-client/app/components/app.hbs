@@ -1,0 +1,29 @@
+<div class='App'>
+  <header class='App-header'>
+    <img
+      src='https://ember-super-rentals.netlify.app/assets/images/teaching-tomster-756a14cc8225582bf530b5d0c624db4d.png'
+      class='App-logo'
+      alt='logo'
+    />
+  </header>
+  <div class='main'>
+
+    {{#if @catelog.isRunning}}
+      Loading...
+    {{else}}
+
+      <div class='content'>
+        <div class='list-container'>
+          <CatelogList
+            @items={{@catelog.value.items}}
+            @onItemClick={{this.onItemClick}}
+          />
+        </div>
+        <Cart
+          @onCheckout={{this.clearSelectedItems}}
+          @items={{this.selectedItems}}
+        />
+      </div>
+    {{/if}}
+  </div>
+</div>

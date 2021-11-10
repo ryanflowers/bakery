@@ -1,0 +1,12 @@
+<form id='payment-form'>
+  <div id='card-container'></div>
+  <button
+    onclick={{this.handlePaymentMethodSubmission}}
+    id='card-button'
+    type='button'
+  >
+    Pay
+    {{formatIntToUSD @amount}}
+  </button>
+</form>
+<div id='payment-status-container'></div>
