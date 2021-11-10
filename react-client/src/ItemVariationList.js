@@ -1,8 +1,3 @@
-import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import { getCatelog } from "./Catelog";
-import { Cart } from "./Cart";
 import { formatIntToUSD } from "./Utils";
 
 // TODO: Dirty hack to not upload an image. If time permits then upload
@@ -41,26 +36,6 @@ const catelogItemImageMap = new Map([
   ],
 ]);
 
-const CatelogList = ({ objects, onItemClick }) => {
-  return objects?.length > 0
-    ? objects.map((object) => {
-        const { item_data, id } = object;
-
-        return (
-          <div className="list-item" key={id}>
-            <div className="name">{item_data.name}</div>
-            <div>{item_data.description}</div>
-            <br />
-            <ItemVariationList
-              variations={item_data.variations}
-              onItemClick={onItemClick}
-            />
-          </div>
-        );
-      })
-    : "No items found";
-};
-
 const ItemVariationList = ({ variations, onItemClick }) => {
   return variations?.length > 0
     ? variations.map((item) => {
@@ -81,50 +56,4 @@ const ItemVariationList = ({ variations, onItemClick }) => {
     : "No items found";
 };
 
-const App = () => {
-  const [data, setData] = React.useState({ catelog: null, selectedItem: null });
-
-  React.useEffect(() => {
-    async function setCatelogData() {
-      const data = await getCatelog();
-      setData((currentData) => ({
-        catelog: JSON.parse(data.message),
-        selectedItem: currentData.selectedItem,
-      }));
-    }
-
-    setCatelogData();
-  }, [setData]);
-
-  const onItemClick = React.useCallback(
-    (itemId) => {
-      setData((data) => ({ catelog: data.catelog, selectedItem: itemId }));
-    },
-    [setData]
-  );
-
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-      </header>
-      <div className="main">
-        {!data.catelog ? (
-          "Loading..."
-        ) : (
-          <div className="content">
-            <div className="list-container">
-              <CatelogList
-                objects={data.catelog.objects}
-                onItemClick={onItemClick}
-              />
-            </div>
-            <Cart selectedItem={data.selectedItem}></Cart>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-};
-
-export default App;
+export { ItemVariationList };
