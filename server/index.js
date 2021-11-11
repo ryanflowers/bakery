@@ -15,6 +15,7 @@ import retry from "async-retry";
 // const { validatePaymentPayload } = require("./server/schema");
 // square provides the API client and error types
 import { nanoid } from "nanoid";
+import cors from "cors";
 
 const PORT = process.env.PORT || 3001;
 
@@ -25,6 +26,8 @@ const client = new Client({
 });
 
 const app = express();
+
+app.use(cors());
 
 /**
  * Api's
@@ -80,7 +83,7 @@ app.get("/api", (req, res) => {
 /**
  * Payments
  **/
-app.post("/payment", async (req, res) => {
+app.post("/api/payment", async (req, res) => {
   const payload = await json(req);
 
   await retry(async (bail) => {

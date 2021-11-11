@@ -16,7 +16,7 @@ async function createPayment(token) {
     sourceId: token,
   });
 
-  const paymentResponse = await fetch("/payment", {
+  const paymentResponse = await fetch("/api/payment", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

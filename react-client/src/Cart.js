@@ -12,7 +12,7 @@ const Cart = ({ selectedItem }) => {
       !data.items.find((item) => item.id === selectedItem.id)
     ) {
       setData((data) => ({
-        items: [].concat(data.items, [selectedItem]),
+        items: [...data.items, selectedItem],
       }));
     }
   }, [selectedItem]);
